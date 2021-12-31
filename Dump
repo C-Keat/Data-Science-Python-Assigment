@@ -1,0 +1,20 @@
+#Seeing the average tweets perday
+
+def tweets_per_day(df):
+  df["Time"] = pd.to_datetime(df['Time'],format = '%Y%m%d')
+  return df[['Tweets']].groupby(df['Time'].dt.date).count()
+
+billsTsPerDay = tweets_per_day(df0)
+elonsTsPerDay = tweets_per_day(df1)
+jeffsTsPerDay = tweets_per_day(df2)
+
+plt.plot(billsTsPerDay, label = "Bill Gates")
+plt.plot(elonsTsPerDay, label = "Elon Musk")
+plt.plot(jeffsTsPerDay, label = "Jeff Basos")
+plt.title('Tweets a day')
+plt.xlabel("Date")
+plt.ylabel("Count")
+plt.legend()
+plt.xlim([datetime.date(2021, 12, 1), datetime.date(2022,1,1)])
+plt.show()
+
